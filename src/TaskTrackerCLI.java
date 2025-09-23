@@ -1,15 +1,12 @@
 import java.io.IOException;
 
-public class Main {
+public class TaskTrackerCLI {
     public static void main(String[] args) throws IOException {
-        TaskManager taskManager = new TaskManager();
+        TaskManager taskManager = TaskManager.getInstance();
         String command = args[0];
 
         switch(command) {
             case "add":
-                if (args.length == 0) {
-                    System.out.println("Invalid arguments.");
-                }
                 if (args.length != 2) {
                     System.err.println("Invalid arguments. Usage: add <title>");
                 }
@@ -17,6 +14,9 @@ public class Main {
                 Task task = taskManager.addTask(args[1]);
                 System.out.println("Task added successfully: " + task);
                 taskManager.writeTasks();
+
+            case "write":
+                System.out.println(taskManager);
         }
     }
 }
