@@ -8,7 +8,7 @@ import java.util.List;
 public class TaskManager {
     private static volatile TaskManager instance;
     private final List<Task> taskList;
-    private int lastId = 0;
+    private int lastId;
     private final Path FILE = Path.of("tasks.json");
 
     private TaskManager() throws IOException {
@@ -46,15 +46,14 @@ public class TaskManager {
     public void writeTasks() throws IOException {
         StringBuilder taskString = new StringBuilder("[");
 
-
         for (Task task : taskList) {
             taskString
                     .append(System.lineSeparator()).append("{")
-                    .append(System.lineSeparator()).append("\"").append("id").append("\"").append(":").append("\"").append(task.getId()).append("\",")
-                    .append(System.lineSeparator()).append("\"").append("description").append("\"").append(":").append("\"").append(task.getDescription()).append("\",")
-                    .append(System.lineSeparator()).append("\"").append("status").append("\"").append(":").append("\"").append(task.getStatus()).append("\",")
-                    .append(System.lineSeparator()).append("\"").append("createdAt").append("\"").append(":").append("\"").append(task.getCreatedAt()).append("\",")
-                    .append(System.lineSeparator()).append("\"").append("updatedAt").append("\"").append(":").append("\"").append(task.getUpdatedAt()).append("\"")
+                    .append(System.lineSeparator()).append("\"id\": ").append(task.getId()).append(",")
+                    .append(System.lineSeparator()).append("\"description\": ").append("\"").append(escapeJson(task.getDescription())).append("\"").append(",")
+                    .append(System.lineSeparator()).append("\"status\": ").append("\"").append(escapeJson(String.valueOf(task.getStatus()))).append("\"").append(",")
+                    .append(System.lineSeparator()).append("\"createdAt\": ").append("\"").append(escapeJson(task.getCreatedAt().toString())).append("\"").append(",")
+                    .append(System.lineSeparator()).append("\"updatedAt\": ").append("\"").append(escapeJson(task.getUpdatedAt().toString())).append("\"")
                     .append(System.lineSeparator()).append("}");
 
             if(!task.equals(taskList.getLast())) {
@@ -66,6 +65,11 @@ public class TaskManager {
         taskString.append(System.lineSeparator()).append("]");
 
         Files.writeString(FILE, taskString);
+    }
+
+    private static String escapeJson(String string) {
+        return string.replace("\\","\\\\")
+                .replace("\"" , "");
     }
 
     public void loadTasks() throws IOException {
@@ -84,24 +88,24 @@ public class TaskManager {
                 valor = line.substring(position, (line.length() - 2));
             }
 
-           if (line.contains("\"id\"")) {
-               id = Integer.parseInt(valor);
+           if (line.startsWith("\"id\"")) {
+               id = Integer.parseInt(line.substring(position, line.length() - 1));
            }
 
-           if (line.contains("\"description\"")) {
-               description = valor;
+           if (line.startsWith("\"description\"")) {
+               description = escapeJson(valor);
            }
 
-           if (line.contains("\"status\"")) {
-               status = Status.valueOf(valor);
+           if (line.startsWith("\"status\"")) {
+               status = Status.valueOf(escapeJson(valor));
            }
 
-           if (line.contains("\"createdAt\"")) {
-               createdAt = LocalDateTime.parse(valor);
+           if (line.startsWith("\"createdAt\"")) {
+               createdAt = LocalDateTime.parse(escapeJson(valor));
            }
 
-           if (line.contains("\"updatedAt\"")) {
-               updatedAt = LocalDateTime.parse(line.substring(position, line.length() - 1));
+           if (line.startsWith("\"updatedAt\"")) {
+               updatedAt = LocalDateTime.parse(escapeJson(line.substring(position, (line.length() - 1))));
                taskList.add(new Task(id, description, status, createdAt, updatedAt));
            }
         }

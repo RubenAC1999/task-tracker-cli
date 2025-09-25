@@ -15,6 +15,8 @@ public class TaskTrackerCLI {
                 System.out.println("Task added successfully: " + task);
                 taskManager.writeTasks();
 
+                break;
+
             case "write":
                 System.out.println(taskManager);
         }
