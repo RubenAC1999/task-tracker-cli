@@ -108,8 +108,34 @@ public class TaskManager {
                updatedAt = LocalDateTime.parse(escapeJson(line.substring(position, (line.length() - 1))));
                taskList.add(new Task(id, description, status, createdAt, updatedAt));
            }
+
+            lastId = taskList.stream()
+                    .mapToInt(Task::getId)
+                    .max()
+                    .orElse(0);
+
         }
     }
+
+    public Task updateTask(int id, String newDescription) throws IOException {
+        Task taskUpdated = null;
+
+        if (id >= taskList.size()) {
+            System.err.println("Error: ID not found.");
+            return taskUpdated;
+        }
+
+        for (Task task : taskList) {
+            if (task.getId() == id) {
+                task.setDescription(newDescription);
+                taskUpdated = task;
+            }
+        }
+
+        return taskUpdated;
+    }
+
+
 
 
 }

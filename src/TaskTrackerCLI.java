@@ -17,8 +17,14 @@ public class TaskTrackerCLI {
 
                 break;
 
-            case "write":
-                System.out.println(taskManager);
+            case "update":
+                if (args.length != 3) {
+                    System.err.println("Invalid arguments. Usage: update <id> <description>");
+                }
+
+                task = taskManager.updateTask(Integer.parseInt(args[1]), args[2]);
+                System.out.println("Task updated successfully: " + task);
+                taskManager.writeTasks();
         }
     }
 }
