@@ -1,3 +1,5 @@
+package core;
+
 import java.time.LocalDateTime;
 
 public class Task {
@@ -57,6 +59,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return createdAt.toString() + " " + id + ": " + description + " [" + status + "]";
+        return "[" + id+ "] " + description + " - " + status + " (Created: " + createdAt + ")";
     }
 }
