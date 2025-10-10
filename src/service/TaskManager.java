@@ -90,7 +90,7 @@ public class TaskManager {
         }
 
         System.out.println("\n────── TASKS ──────\n");
-        taskList.stream().forEach(task -> System.out.println(task.toCliFormat()));
+        taskList.forEach(task -> System.out.println(task.toCliFormat()));
     }
 
     public void listDoneTasks() {
@@ -99,23 +99,30 @@ public class TaskManager {
             return;
         }
 
-        System.out.println("-----TASKS------");
-        taskList.stream().forEach(task -> System.out.println(task.toCliFormat()));
+        System.out.println("\n────── TASKS ──────\n");
+        taskList.stream()
+                .filter(task -> task.getStatus().equals(Status.DONE))
+                .forEach(task -> System.out.println(task.toCliFormat()));
     }
 
     public void listInProgressTasks() {
-        taskList.stream().filter(task -> task.getStatus() == Status.IN_PROGRESS).forEach(System.out::println);
+        System.out.println("\n────── TASKS ──────\n");
+        taskList.stream()
+                .filter(task -> task.getStatus() == Status.IN_PROGRESS)
+                .forEach(task -> System.out.println(task.toCliFormat()));
     }
 
     public void showCommands() {
-        System.out.println("add <title>");
-        System.out.println("update <id> <title>");
-        System.out.println("delete <id>");
-        System.out.println("mark-in-progress <id>");
-        System.out.println("mark-done <id>");
-        System.out.println("list");
-        System.out.println("list done");
-        System.out.println("list in-progress");
+        System.out.println("Task Tracker CLI it is a simple application to manage your tasks.\n\n");
+        System.out.println("List of commands: \n\n");
+        System.out.println("add <title>                     Add a new task to the list");
+        System.out.println("update <id> <title>             Update a task's description.");
+        System.out.println("delete <id>                     Delete a task from the list.");
+        System.out.println("mark-in-progress <id>           Update a task's status to In-progress");
+        System.out.println("mark-done <id>                  Update a task's status to Done");
+        System.out.println("list                            List all the tasks in the list.");
+        System.out.println("list done                       List all the done tasks in the list.");
+        System.out.println("list in-progress/inprogress     List all the in-progress tasks in the list.");
     }
 
 

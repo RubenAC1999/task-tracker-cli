@@ -68,22 +68,22 @@ public class TaskTrackerCLI {
                 break;
 
             case "list":
-                    if (args.length == 1) {
-                        taskManager.listTasks();
-                        break;
-                    }
+                if (args.length == 1) {
+                    taskManager.listTasks();
+                    break; }
 
-                    if (args[1].equals("done")) {
-                        taskManager.listDoneTasks();
-                        break;
-                    }
-
-                    if (args[1].equals("in-progress")) {
-                        taskManager.listInProgressTasks();
-                        break;
-                    }
-
+                if ("done".equalsIgnoreCase(args[1])) {
+                    taskManager.listDoneTasks();
                     break;
+                }
+
+                if ("in-progress".equalsIgnoreCase(args[1]) || "inprogress".equalsIgnoreCase(args[1])) {
+                    taskManager.listInProgressTasks();
+                    break;
+                }
+
+                System.err.println("Invalid arguments. Usage: list [done|in-progress]");
+                break;
 
             case "help":
                 taskManager.showCommands();
