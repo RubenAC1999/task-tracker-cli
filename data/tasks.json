@@ -12,5 +12,19 @@
 "status": "TODO",
 "createdAt": "2025-10-07T17:31:41.941001",
 "updatedAt": "2025-10-07T17:31:41.941001"
+},
+{
+"id": 3,
+"description": "tarea1",
+"status": "TODO",
+"createdAt": "2025-10-10T18:12:22.369331",
+"updatedAt": "2025-10-10T18:12:22.370286"
+},
+{
+"id": 4,
+"description": "ejemplo",
+"status": "TODO",
+"createdAt": "2025-10-10T18:20:34.220402",
+"updatedAt": "2025-10-10T18:20:34.221165"
 }
 ]

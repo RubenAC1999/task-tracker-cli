@@ -10,13 +10,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class JsonStorage {
-    private static final Path FILE = Path.of("data/tasks.json");
+    private static final Path FILE = Path.of("data", "tasks.json");
 
     public JsonStorage() throws IOException {
         if (!Files.exists(FILE)) {
             Files.writeString(FILE, "[]");
-        } else {
-
         }
     }
 

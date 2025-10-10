@@ -84,11 +84,23 @@ public class TaskManager {
     }
 
     public void listTasks() {
-        taskList.forEach(System.out::println);
+        if (taskList.isEmpty()) {
+            System.out.println("No tasks found.");
+            return;
+        }
+
+        System.out.println("\n────── TASKS ──────\n");
+        taskList.stream().forEach(task -> System.out.println(task.toCliFormat()));
     }
 
     public void listDoneTasks() {
-        taskList.stream().filter(task -> task.getStatus() == Status.DONE).forEach(System.out::println);
+        if (taskList.isEmpty()) {
+            System.out.println("No tasks found.");
+            return;
+        }
+
+        System.out.println("-----TASKS------");
+        taskList.stream().forEach(task -> System.out.println(task.toCliFormat()));
     }
 
     public void listInProgressTasks() {

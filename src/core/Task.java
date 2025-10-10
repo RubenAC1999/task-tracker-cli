@@ -57,6 +57,18 @@ public class Task {
         this.updatedAt = updatedAt;
     }
 
+    public String toCliFormat() {
+        return String.format(
+               "[ID:%-3d]  %-12s  |   %-30s  |   %-10s  |  %-10s" +
+                        "\n-------------------------------------------------------------------------------------------------",
+                id,
+                status,
+                description.length() > 30 ? description.substring(0, 27) + "..." : description,
+                createdAt.toLocalDate(),
+                updatedAt.toLocalDate()
+        );
+    }
+
     @Override
     public String toString() {
         return "[" + id+ "] " + description + " - " + status + " (Created: " + createdAt + ")";

@@ -1,4 +1,5 @@
-package cli;
+import core.Task;
+import service.TaskManager;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -81,6 +82,8 @@ public class TaskTrackerCLI {
                         taskManager.listInProgressTasks();
                         break;
                     }
+
+                    break;
 
             case "help":
                 taskManager.showCommands();
