@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: TaskTrackerCLI
+Implementation-Title: Task Tracker CLI
+Implementation-Version: 1.0
+Implementation-Vendor: RubenAC99
