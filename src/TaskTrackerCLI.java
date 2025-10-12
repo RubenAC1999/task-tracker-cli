@@ -18,7 +18,7 @@ public class TaskTrackerCLI {
                 }
 
                 task = taskManager.addTask(args[1]);
-                System.out.println("core.Task added successfully: " + task);
+                System.out.println("Task added successfully: " + task);
                 break;
 
             case "update":
@@ -27,7 +27,7 @@ public class TaskTrackerCLI {
                 }
 
                 task = taskManager.updateTask(Integer.parseInt(args[1]), args[2]);
-                System.out.println("core.Task updated successfully: " + task);
+                System.out.println("Task updated successfully: " + task);
                 break;
 
             case "delete":
