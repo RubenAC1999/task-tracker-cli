@@ -18,7 +18,7 @@ public class TaskTrackerCLI {
                 }
 
                 task = taskManager.addTask(args[1]);
-                System.out.println("Task added successfully: " + task);
+                System.out.println("Task added successfully: \n" + task);
                 break;
 
             case "update":
@@ -27,7 +27,7 @@ public class TaskTrackerCLI {
                 }
 
                 task = taskManager.updateTask(Integer.parseInt(args[1]), args[2]);
-                System.out.println("Task updated successfully: " + task);
+                System.out.println("Task updated successfully: \n" + task);
                 break;
 
             case "delete":
@@ -46,7 +46,6 @@ public class TaskTrackerCLI {
                         taskManager.deleteTask(task);
                     }
                 }
-
                 break;
 
             case "mark-in-progress":
@@ -55,7 +54,7 @@ public class TaskTrackerCLI {
                 }
 
                 taskManager.markTaskInProgress(Integer.parseInt(args[1]));
-
+                System.out.println("Task updated successfully.");
                 break;
 
             case "mark-done":
@@ -64,7 +63,7 @@ public class TaskTrackerCLI {
                 }
 
                 taskManager.markTaskDone(Integer.parseInt(args[1]));
-
+                System.out.println("Task updated successfully.");
                 break;
 
             case "list":

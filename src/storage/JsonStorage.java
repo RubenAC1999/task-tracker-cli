@@ -40,11 +40,9 @@ public class JsonStorage {
             if (i != (taskList.size() - 1)) {
                 sb.append(",");
             }
-
         }
 
         sb.append(System.lineSeparator()).append("]");
-
         Files.writeString(FILE, sb.toString());
     }
 

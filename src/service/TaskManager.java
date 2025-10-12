@@ -48,8 +48,7 @@ public class TaskManager {
 
     public void deleteTask(Task task) throws IOException {
         taskList.remove(task);
-        System.out.println("core.Task deleted successfully.");
-
+        System.out.println("Task deleted successfully.");
         writeTasks();
     }
 
@@ -66,9 +65,6 @@ public class TaskManager {
 
         task.setStatus(Status.IN_PROGRESS);
         task.setUpdatedAt(LocalDateTime.now());
-
-        System.out.println("core.Task updated successfully.");
-
         writeTasks();
     }
 
@@ -77,9 +73,6 @@ public class TaskManager {
 
         task.setStatus(Status.DONE);
         task.setUpdatedAt(LocalDateTime.now());
-
-        System.out.println("core.Task updated successfully.");
-
         writeTasks();
     }
 

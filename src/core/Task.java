@@ -1,6 +1,7 @@
 package core;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
     private int id;
@@ -58,19 +59,20 @@ public class Task {
     }
 
     public String toCliFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         return String.format(
-               "[ID:%-3d]  %-12s  |   %-30s  |   %-10s  |  %-10s" +
-                        "\n-------------------------------------------------------------------------------------------------",
+               "[ID:%-3d]  %-12s  |   %-30s  |   %-19s  |  %-19s" +
+                       "\n-----------------------------------------------------------------------------------------------------------------",
                 id,
                 status,
                 description.length() > 30 ? description.substring(0, 27) + "..." : description,
-                createdAt.toLocalDate(),
-                updatedAt.toLocalDate()
+                createdAt.format(formatter),
+                updatedAt.format(formatter)
         );
     }
 
     @Override
     public String toString() {
-        return "[" + id+ "] " + description + " - " + status + " (Created: " + createdAt + ")";
+        return "[" + id+ "] " + description + " - " + status;
     }
 }
