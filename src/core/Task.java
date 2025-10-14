@@ -59,12 +59,22 @@ public class Task {
     }
 
     public String toCliFormat() {
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String statusColored = String.valueOf(status);
+
+        switch(statusColored) {
+            case "TODO" -> statusColored = "\u001B[31m" + status + "\u001B[0m";
+            case "IN_PROGRESS" -> statusColored = "\u001B[33m" + status + "\u001B[0m";
+            case "DONE" -> statusColored = "\u001B[32m" + status + "\u001B[0m";
+        }
+
+
         return String.format(
-               "[ID:%-3d]  %-12s  |   %-30s  |   %-19s  |  %-19s" +
-                       "\n-----------------------------------------------------------------------------------------------------------------",
+               "[ID:%-3d]  %-25s  |   %-30s  |   %-19s  |  %-19s" +
+                       "\n--------------------------------------------------------------------------------------------------------------------",
                 id,
-                status,
+                statusColored,
                 description.length() > 30 ? description.substring(0, 27) + "..." : description,
                 createdAt.format(formatter),
                 updatedAt.format(formatter)
