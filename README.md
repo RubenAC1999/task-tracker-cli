@@ -2,8 +2,9 @@
 
 A simple **command-line task manager** written in **Java** - create, add, update, delete and track your tasks right from your terminal.
 
-![Task Tracker CLI Demo](assets/demo.gif)
+> This project is based on the [Task Tracker project from roadmap.sh](https://roadmap.sh/projects/task-tracker).
 
+![Task Tracker CLI Demo](assets/demo.gif)
 
 ---
 
